@@ -7,6 +7,6 @@ export class AwardsController {
 
   @Get('intervals')
   getIntervals() {
-    return 'awards/intervals';
+    return this.movieService.getAwardIntervals();
   }
 }

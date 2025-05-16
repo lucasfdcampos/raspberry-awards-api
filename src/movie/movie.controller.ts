@@ -7,7 +7,7 @@ export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Get()
-  findAll(): Movie[] {
+  async findAll(): Promise<Movie[]> {
     return this.movieService.findAll();
   }
 }
