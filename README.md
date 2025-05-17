@@ -114,6 +114,8 @@ $ make test-cov
 - `GET /awards/intervals`  
   Returns a JSON with two arrays (`min` and `max`) showing producers with the shortest and longest intervals between wins.
 
+  [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=raspberry-awards&uri=https%3A%2F%2Fraw.githubusercontent.com%2Flucasfdcampos%2Fraspberry-awards-api%2Frefs%2Fheads%2Fmaster%2Fraspberry-awards.json)
+
 ## 🏗️ Project Structure
 
 ```
