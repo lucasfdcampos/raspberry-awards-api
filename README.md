@@ -1,98 +1,146 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<div align="center">
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 🎬 Raspberry Awards API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+[![Issues](https://img.shields.io/github/issues/lucasfdcampos/raspberry-awards-api.svg)](https://github.com/lucasfdcampos/raspberry-awards-api/issues)
+[![License](https://img.shields.io/github/license/lucasfdcampos/raspberry-awards-api.svg)](https://github.com/lucasfdcampos/raspberry-awards-api/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/lucasfdcampos/raspberry-awards-api.svg)](https://github.com/lucasfdcampos/raspberry-awards-api/commits/main)
 
-## Description
+[![NestJS](https://img.shields.io/badge/framework-NestJS-e0234e?logo=nestjs)](https://nestjs.com/)
+[![SQLite3](https://img.shields.io/badge/DB-SQLite3-blue?logo=sqlite)](https://www.sqlite.org/index.html)
+[![TypeORM](https://img.shields.io/badge/ORM-TypeORM-purple?logo=typeorm)](https://typeorm.io/)
+[![fast-csv](https://img.shields.io/badge/CSV-fast--csv-darkred)](https://c2fo.io/fast-csv/)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</div>
 
-## Project setup
+## 🎯 About the Project
 
-```bash
-$ yarn install
+This project was built to provide a simple, modular and testable RESTful API using NestJS. The goal is to process Raspberry Awards data from a CSV file, identify producers with the shortest and longest intervals between wins, and expose this information through clean endpoints.
+
+The application follows best practices with:
+- Modular structure via NestJS
+- In-memory database via SQLite + TypeORM
+- CSV parsing with fast-csv
+- High test coverage using Jest (unit + e2e)
+
+## ⚙️ Technologies Used
+
+- **NestJS** — a progressive Node.js framework for scalable server-side applications
+- **SQLite3** — lightweight database, ideal for testing and in-memory persistence
+- **TypeORM** — a powerful ORM supporting multiple databases
+- **fast-csv** — efficient streaming parser for CSV files
+- **Jest** — testing framework for unit and e2e tests
+
+## 💡 Features
+
+- CSV loading and parsing with `fast-csv`
+- Automatic table creation using TypeORM's `synchronize: true`
+- Clean modular architecture with NestJS
+- Producer interval logic split into small and testable functions
+- Test coverage with Jest
+
+### TypeORM with `synchronize: true`
+
+Quick and easy setup: the `movies` table is created automatically based on the `Movie` entity structure.
+
+> Setting `synchronize: true` shouldn't be used in production - otherwise you can lose production data. [NestJS](https://docs.nestjs.com/recipes/sql-typeorm#:~:text=Setting%20synchronize%3A%20true%20shouldn%27t%20be%20used%20in%20production%20%2D%20otherwise%20you%20can%20lose%20production%20data.)
+
+```ts
+TypeOrmModule.forRoot({
+  type: 'sqlite',
+  database: ':memory:',
+  entities: [Movie],
+  synchronize: true, // auto-creates the table
+}),
 ```
 
-## Compile and run the project
+### CSV loading with fast-csv
 
-```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+```ts
+fs.createReadStream(csvPath)
+  .pipe(csv.parse({ headers: true, delimiter: ';' }))
+  ...
 ```
 
-## Run tests
+## 📦 Project setup
+This project was scaffolded using the official NestJS CLI:
+```bash
+$ nest new raspberry-awards-api
+```
+Using the Nest CLI ensures a clean and organized architecture out of the box, following best practices for modularity, testing, and maintainability.
+
+Then, the main module for handling movie data was generated using the CLI:
+```bash
+$ nest generate resource movie
+```
+This created the controller, service, module, DTOs, and entity structure following NestJS best practices for a RESTful resource.
+
+### 🛠️ Environment Variables
+
+To define the CSV path, create a `.env` file:
+
+```env
+CSV_PATH=src/movie/movielist.csv
+```
+
+## 🚀 Running the Project
+
+```bash
+# install dependencies
+$ make install
+
+# starts the project (also creates .env if missing)
+$ make start
+```
+
+### 🧪 Run tests
 
 ```bash
 # unit tests
-$ yarn run test
+$ make test
 
 # e2e tests
-$ yarn run test:e2e
+$ make test-e2e
 
 # test coverage
-$ yarn run test:cov
+$ make test-cov
 ```
 
-## Deployment
+### 🔗 Available end-points
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- `GET /movie`  
+  Returns all movies loaded from the CSV.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- `GET /awards/intervals`  
+  Returns a JSON with two arrays (`min` and `max`) showing producers with the shortest and longest intervals between wins.
 
-```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+## 🏗️ Project Structure
+
+```
+├── app.module.ts
+├── main.ts
+└── movie
+    ├── awards.controller.spec.ts
+    ├── awards.controller.ts
+    ├── dto
+    │   ├── award-interval.dto.ts
+    │   └── producer-interval.dto.ts
+    ├── entities
+    │   └── movie.entity.ts
+    ├── movie.controller.spec.ts
+    ├── movie.controller.ts
+    ├── movielist.csv
+    ├── movie.module.ts
+    ├── movie.service.spec.ts
+    └── movie.service.ts
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🧠 Notes
 
-## Resources
+Link to extra documentation shows organization and formation of ideas for the project.
 
-Check out a few resources that may come in handy when working with NestJS:
+[![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://lumbar-mall-a1b.notion.site/Challenge-golden-raspberry-awards-1f20ceab98a980479a95c76372433e21)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📄 License
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License - see the LICENSE file for details
