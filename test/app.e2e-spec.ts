@@ -16,10 +16,52 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('/movie (GET) should return all movies', async () => {
+    const response = await request(app.getHttpServer()).get('/movie');
+
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBe(true);
+  });
+
+  it('/awards/intervals (GET) shoudl return min and max award intervals', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/awards/intervals',
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('min');
+    expect(response.body).toHaveProperty('max');
+  });
+
+  describe('GET /awards/intervals', () => {
+    it('should return the correct producers with min and max intervals', async () => {
+      const response = await request(app.getHttpServer()).get(
+        '/awards/intervals',
+      );
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        min: [
+          {
+            producer: 'Joel Silver',
+            interval: 1,
+            previousWin: 1990,
+            followingWin: 1991,
+          },
+        ],
+        max: [
+          {
+            producer: 'Matthew Vaughn',
+            interval: 13,
+            previousWin: 2002,
+            followingWin: 2015,
+          },
+        ],
+      });
+    });
   });
 });
