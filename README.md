@@ -25,11 +25,11 @@ The application follows best practices with:
 
 ## ⚙️ Technologies Used
 
-- **NestJS** — a progressive Node.js framework for scalable server-side applications
-- **SQLite3** — lightweight database, ideal for testing and in-memory persistence
-- **TypeORM** — a powerful ORM supporting multiple databases
-- **fast-csv** — efficient streaming parser for CSV files
-- **Jest** — testing framework for unit and e2e tests
+- **[NestJS](https://nestjs.com/)** — a progressive Node.js framework for scalable server-side applications
+- **[SQLite3](https://www.sqlite.org/index.html)** — lightweight database, ideal for testing and in-memory persistence
+- **[TypeORM](https://typeorm.io/)** — a powerful ORM supporting multiple databases
+- **[fast-csv](https://c2fo.io/fast-csv/)** — efficient streaming parser for CSV files
+- **[Jest](https://jestjs.io/)** — testing framework for unit and e2e tests
 
 ## 💡 Features
 
