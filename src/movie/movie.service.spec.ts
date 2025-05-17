@@ -243,7 +243,7 @@ describe('MovieService', () => {
           studios: '',
         },
         {
-          year: 2002,
+          year: 2001,
           producers: 'A',
           winner: true,
           id: 2,
@@ -273,7 +273,7 @@ describe('MovieService', () => {
       const result = await service.getAwardIntervals();
 
       expect(result.min).toEqual([
-        { producer: 'A', interval: 1, previousWin: 2000, followingWin: 2002 },
+        { producer: 'A', interval: 1, previousWin: 2000, followingWin: 2001 },
       ]);
 
       expect(result.max).toEqual([
