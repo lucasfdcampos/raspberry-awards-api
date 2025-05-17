@@ -75,42 +75,39 @@ $ nest generate resource movie
 ```
 This created the controller, service, module, DTOs, and entity structure following NestJS best practices for a RESTful resource.
 
-### 🛠️ Environment Variables
-
-To define the CSV path, create a `.env` file:
-
-```env
-CSV_PATH=src/movie/movielist.csv
-```
-
 ## 🚀 Running the Project
 
 1. **Clone the repository**
 ```bash
-$ git@github.com:lucasfdcampos/raspberry-awards-api.git
+❯  git clone git@github.com:lucasfdcampos/raspberry-awards-api.git
 ```
 
-2. **Start the application**
+2. **Enter the directory**
+```bash
+❯  cd raspberry-awards-api/
+```
+
+3. **Start the application**
 
 ```bash
 # install dependencies
-$ make install
+❯  make install
 
 # starts the project (also creates .env if missing)
-$ make start
+❯  make start
 ```
 
 ### 🧪 Run tests
 
 ```bash
 # unit tests
-$ make test
+❯  make test
 
 # e2e tests
-$ make test-e2e
+❯  make test-e2e
 
 # test coverage
-$ make test-cov
+❯  make test-cov
 ```
 
 ### 🔗 Available end-points
