@@ -63,7 +63,7 @@ fs.createReadStream(csvPath)
 ```
 
 ## 📦 Project setup
-This project was scaffolded using the official NestJS CLI:
+This project was created using the NestJS CLI:
 ```bash
 $ nest new raspberry-awards-api
 ```
