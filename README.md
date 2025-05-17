@@ -85,6 +85,13 @@ CSV_PATH=src/movie/movielist.csv
 
 ## 🚀 Running the Project
 
+1. **Clone the repository**
+```bash
+$ git@github.com:lucasfdcampos/raspberry-awards-api.git
+```
+
+2. **Start the application**
+
 ```bash
 # install dependencies
 $ make install
