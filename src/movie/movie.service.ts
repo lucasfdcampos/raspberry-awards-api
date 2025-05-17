@@ -210,6 +210,7 @@ export class MovieService implements OnModuleInit {
    *
    * @param {ProducerInterval[]} intervals List of producer intervals
    * @returns {Record<number, ProducerInterval[]>} Map of interval value to list of producer intervals
+   * Ex: 1: [{ producer: 'Joel Silver', ... }],
    */
   private groupByInterval(
     intervals: ProducerInterval[],
